@@ -6,12 +6,13 @@ import './Products.css';
 import CustomButton from '../ReusuableComponents/CustomButton';
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]); // Fetch and store all products
   const [loading, setLoading] = useState(true);
   const searchTerm = useSelector((state) => state.searchTerm);
   const selectedCategory = useSelector((state) => state.selectedCategory);
   const dispatch = useDispatch();
 
+  // Fetch all products once on mount and when category changes
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -19,7 +20,7 @@ const Products = () => {
           ? `https://fakestoreapi.com/products/category/${selectedCategory}`
           : 'https://fakestoreapi.com/products';
         const response = await axios.get(url);
-        setProducts(response.data);
+        setAllProducts(response.data); // Store fetched products
         setLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -28,15 +29,18 @@ const Products = () => {
     };
 
     fetchProducts();
-  }, [selectedCategory]);
+  }, [selectedCategory]); // Refetch when category changes
+
+  // Filter products client-side using BOTH category and search term
+  const filteredProducts = allProducts.filter((product) => {
+    const matchesCategory = !selectedCategory || product.category === selectedCategory;
+    const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
   };
-
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   if (loading) {
     return (

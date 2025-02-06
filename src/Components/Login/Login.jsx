@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Correct import
 import CustomButton from "../ReusuableComponents/CustomButton";
 
 const Login = () => {
+  const [mobileNumber, setMobileNumber] = useState(""); // State for mobile number
+  const navigate = useNavigate(); // Call useNavigate at the top level
+
+  function handleContinue() {
+    // Check if the mobile number is exactly 10 digits
+    if (mobileNumber.length === 10) {
+      // Navigate to specific path
+      navigate("/");
+    } else {
+      alert("Please enter a valid 10-digit mobile number."); // Alert for invalid input
+    }
+  }
+
   return (
     <div
       style={{
@@ -47,8 +61,10 @@ const Login = () => {
           >
             <h4 style={{ fontSize: "16px" }}>Login or Signup</h4>
             <input
-              type="search"
+              type="text" // Changed to text for better input handling
               placeholder="+91 | Mobile Number"
+              value={mobileNumber} // Bind input value to state
+              onChange={(e) => setMobileNumber(e.target.value)} // Update state on change
               style={{ marginBottom: "20px", padding: "10px", width: "100%" }}
             />
             <div
@@ -60,11 +76,17 @@ const Login = () => {
               }}
             >
               <p style={{ margin: 0 }}>By continuing, I agree to the</p>
-              <p className="p-edit" style={{ color: "#F13AB1", margin: "0 5px", fontSize: "12px" }}>
+              <p
+                className="p-edit"
+                style={{ color: "#F13AB1", margin: "0 5px", fontSize: "12px" }}
+              >
                 Terms of Use
               </p>
               <p style={{ margin: 0 }}>&</p>
-              <p className="p-edit" style={{ color: "#F13AB1", margin: "0 5px", fontSize: "12px" }}>
+              <p
+                className="p-edit"
+                style={{ color: "#F13AB1", margin: "0 5px", fontSize: "12px" }}
+              >
                 Privacy Policy
               </p>
             </div>
@@ -75,8 +97,12 @@ const Login = () => {
               backgroundColor="#E72744"
               width="100%"
               height="40px"
+              onClick={handleContinue}
             />
-            <div className="b-trouble d-flex" style={{ marginTop: "20px", fontSize: "12px" }}>
+            <div
+              className="b-trouble d-flex"
+              style={{ marginTop: "20px", fontSize: "12px" }}
+            >
               <p style={{ margin: 0 }}>Have Trouble Logging in?</p>
               <p style={{ color: "#F13AB1", marginLeft: "5px" }}>Get help</p>
             </div>

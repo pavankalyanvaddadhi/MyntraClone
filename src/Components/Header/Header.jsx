@@ -6,21 +6,22 @@ import { ShoppingCart } from 'lucide-react';
 import CustomButton from "../ReusuableComponents/CustomButton";
 
 const Header = () => {
-  const [searchData, updateSearchData] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
+  const selectedCategory = useSelector((state) => state.selectedCategory);
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const handleSearch = (event) => {
     const value = event.target.value;
-    updateSearchData(value);
-    dispatch(updateSearchTerm(value));
+    setSearchInput(value);
+    dispatch(updateSearchTerm(value)); // Update search term in Redux
   };
 
   const handleCategoryClick = (category) => {
-    dispatch(selectCategory(category));
+    dispatch(selectCategory(category)); // Update category in Redux
   };
 
   const handleLogin = () => navigate("/Login");
@@ -54,36 +55,36 @@ const Header = () => {
           <CustomButton 
             text="All" 
             variant="text" 
-            backgroundColor={searchData === "" ? "#e72744" : "#f5f5f5"}
-            color={searchData === "" ? "white" : "black"}
+            backgroundColor={selectedCategory === "" ? "#e72744" : "#f5f5f5"}
+            color={selectedCategory === "" ? "white" : "black"}
             onClick={() => handleCategoryClick("")} 
           />
           <CustomButton 
             text="Mens" 
             variant="text" 
-            backgroundColor={searchData === "men's clothing" ? "#e72744" : "#f5f5f5"}
-            color={searchData === "men's clothing" ? "white" : "black"}
+            backgroundColor={selectedCategory === "men's clothing" ? "#e72744" : "#f5f5f5"}
+            color={selectedCategory === "men's clothing" ? "white" : "black"}
             onClick={() => handleCategoryClick("men's clothing")} 
           />
           <CustomButton 
             text="Women" 
             variant="text" 
-            backgroundColor={searchData === "women's clothing" ? "#e72744" : "#f5f5f5"}
-            color={searchData === "women's clothing" ? "white" : "black"}
+            backgroundColor={selectedCategory === "women's clothing" ? "#e72744" : "#f5f5f5"}
+            color={selectedCategory === "women's clothing" ? "white" : "black"}
             onClick={() => handleCategoryClick("women's clothing")} 
           />
           <CustomButton 
             text="Jewellery" 
             variant="text" 
-            backgroundColor={searchData === "jewelery" ? "#e72744" : "#f5f5f5"}
-            color={searchData === "jewelery" ? "white" : "black"}
+            backgroundColor={selectedCategory === "jewelery" ? "#e72744" : "#f5f5f5"}
+            color={selectedCategory === "jewelery" ? "white" : "black"}
             onClick={() => handleCategoryClick("jewelery")} 
           />
           <CustomButton 
             text="Electronics" 
             variant="text" 
-            backgroundColor={searchData === "electronics" ? "#e72744" : "#f5f5f5"}
-            color={searchData === "electronics" ? "white" : "black"}
+            backgroundColor={selectedCategory === "electronics" ? "#e72744" : "#f5f5f5"}
+            color={selectedCategory === "electronics" ? "white" : "black"}
             onClick={() => handleCategoryClick("electronics")} 
           />
         </div>
@@ -104,7 +105,7 @@ const Header = () => {
               borderRadius: "4px"
             }}
             onChange={handleSearch}
-            value={searchData}
+            value={searchInput}
           />
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
