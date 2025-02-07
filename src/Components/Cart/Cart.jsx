@@ -21,7 +21,7 @@ const Cart = () => {
 
   const handlePayment = () => {
     const options = {
-      key: "rzp_test_YOUR_KEY_HERE", // Replace with your Razorpay key
+      key: "rzp_test_0cBJKeoLZ8AXIj", // Replace with your Razorpay key
       amount: Math.round(total * 100), // Amount in paise
       currency: "INR",
       name: "Myntra Clone",
