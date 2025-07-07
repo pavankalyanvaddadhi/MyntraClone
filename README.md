@@ -1,8 +1,8 @@
-﻿# Myntra Clone
+﻿# E-Myntra 
 
 ## Overview
 
-Myntra Clone is a web application that replicates the core functionalities of the popular Indian e-commerce platform, Myntra. Built using React and Redux, this project provides users with a seamless shopping experience, allowing them to browse products, manage their shopping cart, and complete transactions through a secure payment gateway.
+E-Myntra is a web application that replicates the core functionalities of the popular Indian e-commerce platform, Myntra. Built using React and Redux, this project provides users with a seamless shopping experience, allowing them to browse products, manage their shopping cart, and complete transactions through a secure payment gateway.
 
 ## Features
 
